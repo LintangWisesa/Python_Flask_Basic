@@ -33,7 +33,8 @@ def about():
 @app.route('/data')
 def data():
     jsonData = json.dumps(Students) 
-    return jsonify(Students = jsonData)
+    return jsonData
+    # return jsonify(Students = jsonData)
 
 if __name__ == '__main__':
     app.run(debug = True)
