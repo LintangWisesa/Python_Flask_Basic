@@ -9,9 +9,6 @@ def index():
 @app.route('/data', methods=['GET', 'POST'])
 def data():
     if request.method == 'POST':
-        # body = request.data
-        # body = request.get_data()
-
         body = request.json
         print(body['name'])
         print(body['age'])
