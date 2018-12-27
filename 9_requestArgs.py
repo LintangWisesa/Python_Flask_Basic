@@ -32,14 +32,10 @@ def about():
 def data():
     if 'id' in request.args:
         id = int(request.args['id'])
+        return jsonify(Students[id])
     else:
         return jsonify({'error': 'No id field provided on URL'})
-    results = []
-    for student in Students:
-        if student['id'] == id:
-            results.append(student)
-            return jsonify(results)
-
+    
 if __name__ == '__main__':
     app.run(debug = True)
 
