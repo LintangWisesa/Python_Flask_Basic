@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import make_response, abort, Flask, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -28,14 +28,20 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/data')
+@app.route('/data', methods=['GET'])
 def data():
-    return jsonify(Students)
-    
-# create a dynamic route /data/something string
-@app.route('/data/<string:id>')
+    return jsonify({'students': Students})
+
+@app.route('/data/<int:id>')
 def datas(id):
-    return jsonify(Students[int(id)])
+    if id-1 > len(Students)-1:
+        abort(404)
+    else:
+        return jsonify(Students[id-1])
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'status': 'Error Not Found'}), 404)
 
 if __name__ == '__main__':
     app.run(debug = True)
