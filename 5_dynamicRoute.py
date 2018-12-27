@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, json, render_template
+from flask import Flask, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -32,14 +32,12 @@ def about():
 
 @app.route('/data')
 def data():
-    jsonData = json.dumps(Students) 
-    return jsonData
-    # return jsonify(Students = jsonData)
-
+    return jsonify(Students)
+    
 # create a dynamic route /data/something
 @app.route('/data/<string:id>')
 def datas(id):
-    return id
+    return jsonify(Students[int(id)])
 
 if __name__ == '__main__':
     app.run(debug = True)
