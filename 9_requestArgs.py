@@ -32,6 +32,7 @@ def about():
 def data():
     if 'id' in request.args:
         id = int(request.args['id'])
+        print(request.args)
         return jsonify(Students[id])
     else:
         return jsonify({'error': 'No id field provided on URL'})
