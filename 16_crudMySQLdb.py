@@ -1,6 +1,3 @@
-# install flask-mysqldb: $ pip install flask-mysqldb
-# install pyyaml: $ pip install pyyaml
-
 from flask import Flask, jsonify, render_template, request
 from flask_mysqldb import MySQL
 import yaml
@@ -19,21 +16,37 @@ mysql = MySQL(app)
 def home():
     return render_template('home.html')
 
-@app.route('/data', methods=['GET', 'POST'])
+@app.route('/data', methods=['POST', 'GET', 'DELETE', 'PUT'])
 def data():
+    
     if request.method == 'POST':
         cursor = mysql.connection.cursor()
-        cursor.execute('INSERT INTO users VALUES(%s, %s)', ('Euis', 25))
+        cursor.execute('INSERT INTO users VALUES(%s, %s)', ('Fafa', 22))
         mysql.connection.commit()
         cursor.close()
         return jsonify({'status': 'Data posted to MySQL!'})
-    else:
+    
+    if request.method == 'GET':
         cursor = mysql.connection.cursor()
         data = cursor.execute('SELECT * FROM USERS')
         if data > 0:
             users = cursor.fetchall()
             print (users)
             return jsonify(users)
+
+    if request.method == 'PUT':
+        cursor = mysql.connection.cursor()
+        cursor.execute('UPDATE users SET name = %s, age = %s WHERE name = "Andi"', ('Alibaba', 32))
+        mysql.connection.commit()
+        cursor.close()
+        return jsonify({'status': 'Data updated on MySQL!'})
+
+    else:
+        cursor = mysql.connection.cursor()
+        cursor.execute('DELETE FROM users WHERE name = "Euis"')
+        mysql.connection.commit()
+        cursor.close()
+        return jsonify({'status': 'Data deleted on MySQL!'})
 
 if __name__ == '__main__':
     app.run(debug = True)
