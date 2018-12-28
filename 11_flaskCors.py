@@ -10,7 +10,7 @@ CORS(app)
 def index():
     return render_template('home.html')
 
-# try to get/post/put/delete to /data using Postman!
+# try to get/post/put/delete to /data from your front-end project!
 @app.route('/data', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def data():
     if request.method == 'POST':
