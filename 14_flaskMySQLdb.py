@@ -1,3 +1,7 @@
+# activate MySQL server
+# create a database called 'lin_flask'
+# create a table called 'users' with 2 col: name & age
+
 # install flask-mysqldb: $ pip install flask-mysqldb
 
 from flask import Flask, jsonify, render_template, request
