@@ -35,7 +35,7 @@ def data():
 # create a dynamic route /data/something int
 @app.route('/data/<int:id>')
 def datas(id):
-    if id-1 > len(Students)-1:
+    if id < 1 or id > len(Students):
         abort(404)
     else:
         return jsonify(Students[id-1])
