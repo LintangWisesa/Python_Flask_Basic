@@ -41,7 +41,12 @@ def datas(id):
 
 @app.errorhandler(404)
 def not_found(error):
+    # return '<h1>Maaf not found!</h1>'
+    # return make_response('<h1>Maaf not found!</h1>')
     return make_response(jsonify({'status': 'Error Not Found'}), 404)
+    # return make_response(
+    #     render_template('error.html')
+    # )
 
 if __name__ == '__main__':
     app.run(debug = True)
