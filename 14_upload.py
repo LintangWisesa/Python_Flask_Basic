@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
